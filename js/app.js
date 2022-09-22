@@ -48,7 +48,7 @@ searchForm.addEventListener('submit', getInputValue);
 
 // 2761623527476614
 const fetchAllSuperHero = async (searchText) => {
-    let url = `https://hp-api.herokuapp.com/api/characters/house/${searchText}`
+    let url = `https://superheroapi.com/api/2761623527476614/search/${searchText}`
     try {
         const response = await fetch(url)
         allData = await response.json()
