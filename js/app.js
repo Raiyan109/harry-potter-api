@@ -48,7 +48,7 @@ searchForm.addEventListener('submit', getInputValue);
 
 // 2761623527476614
 const fetchAllSuperHero = async (searchText) => {
-    let url = `https://superheroapi.com/api/2761623527476614/search/${searchText}`
+    let url = `https://hp-api.herokuapp.com/api/characters/house/${searchText}`
     try {
         const response = await fetch(url)
         allData = await response.json()
@@ -67,12 +67,26 @@ const showSearchList = (data) => {
         const divElem = document.createElement('div')
         divElem.classList.add('search-list-item')
         divElem.innerHTML = `
-            <img src="images/harry-potter-wizarding-world-shared-universe-logo-1092802.jpeg" alt="">
-            <p>wizarding world</p>
+            <img src="${dataItem.image.url ? dataItem.image.url : ''}" alt="">
+            <p data-id='${dataItem.id}'>${dataItem.name}</p>
         `
+        searchList.appendChild(divElem)
     })
 }
 
+searchForm.search.addEventListener('keyup', () => {
+    if (searchForm.search.value.length > 1) {
+        fetchAllSuperHero(searchForm.search.value)
+    }
+    else {
+        searchList.innerHTML = ''
+    }
+})
+
+searchList.addEventListener('click', (event) => {
+    let searchId = event.target.dataset.id
+    console.log(searchId);
+})
 
 
 // const searchBtn = () => {
